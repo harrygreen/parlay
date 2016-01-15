@@ -1,4 +1,6 @@
-var path = require('path');
+// TODO
+// - add SCSS loader
+
 var webpack = require('webpack');
 
 module.exports = {
@@ -6,10 +8,10 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './src/index'
+    './src/app.js'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: __dirname + '/dist',
     filename: 'bundle.js',
     publicPath: '/static/'
   },
@@ -20,33 +22,9 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['react-hot', 'babel?presets[]=es2015&presets[]=react'],
-      include: path.join(__dirname, 'src')
+      exclude: /node_modules/,
+      include: __dirname + '/src'
     }]
   }
 };
 
-
-
-
-// var webpack = require('webpack');
-// module.exports = {
-//     entry: [
-//       'webpack/hot/only-dev-server',
-//       "./js/app.js"
-//     ],
-//     output: {
-//         path: __dirname + '/build',
-//         filename: "bundle.js"
-//     },
-//     module: {
-//         loaders: [
-//             { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
-//             { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-//             { test: /\.css$/, loader: "style!css" }
-//         ]
-//     },
-//     plugins: [
-//       new webpack.NoErrorsPlugin()
-//     ]
-
-// };
