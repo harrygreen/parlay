@@ -1,6 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { switchEdition } from '../actions/globalActions';
 
 const EditionSwitcher = React.createClass({
+
+	propTypes: {
+		dispatch: React.PropTypes.func.isRequired
+	},
 
 	getAvailableOptions() {
 		// grab all options
@@ -14,6 +19,7 @@ const EditionSwitcher = React.createClass({
 
 	// todo
 	// grab this from endpoint
+	// this is printed from the Perl template
 	getAllEditions() {
 		return {
 		   "de": {
@@ -105,10 +111,8 @@ const EditionSwitcher = React.createClass({
 		}
 	},
 
-	 handleChange(e) {
-		this.props.onUserInput({
-			edition: e.target.value
-		});
+	handleChange(e) {
+	 	this.props.dispatch(switchEdition(e.target.value));
     },
 
 	render() {

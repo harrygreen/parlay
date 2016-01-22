@@ -1,14 +1,11 @@
-// TODO
-// - add SCSS loader
-
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'source-map',
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
+    // 'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
-    './src/app.js'
+    './src/index.jsx'
   ],
   output: {
     path: __dirname + '/dist',
@@ -19,12 +16,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['react-hot', 'babel?presets[]=es2015&presets[]=react'],
-      exclude: /node_modules/,
-      include: __dirname + '/src'
-    }]
-  }
+    loaders: [
+      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel?presets[]=es2015&presets[]=react'] },
+      { test: /(\.scss)|(\.sass)$/, loader: 'style!css?sourceMap!sass?outputStyle=expanded&sourceMap&sourceMapContents' },
+    ]
+  },
+  resolve: ["", ".js"]
 };
-

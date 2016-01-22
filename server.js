@@ -8,11 +8,17 @@ new WebpackDevServer(webpack(config), {
   historyApiFallback: true,
   stats: {
   	colors: true
-  }
-}).listen(3000, 'localhost', function (err, result) {
+  },
+  proxy: {
+    '/proxy/*': {
+      target: 'http://dev.buzzfeed.com/buzzfeed/translation_moderation',
+      secure: false,
+    },
+  },
+}).listen(3000, 'dev.buzzfeed.com', function (err, result) {
   if (err) {
     console.log(err);
   }
 
-  console.log('Listening at localhost:3000');
+  console.log('Listening at dev.buzzfeed.com:3000');
 });

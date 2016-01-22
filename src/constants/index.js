@@ -1,0 +1,2 @@
+export const SWITCH_EDITION = 'SWITCH_EDITION';
+export const RECEIVED_POSTS = 'RECEIVED_POSTS';
