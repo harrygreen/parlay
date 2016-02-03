@@ -1,5 +1,5 @@
 import React from 'react';
-import { switchEdition } from '../actions/globalActions';
+import { switchEdition } from '../actions/GlobalActions';
 
 const EditionSwitcher = React.createClass({
 

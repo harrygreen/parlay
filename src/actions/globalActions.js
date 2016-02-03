@@ -15,14 +15,14 @@ export function receivePosts(json, post_type) {
     posts: json.content
   };
 }
-
+ 
 export function fetchPosts(params) {
 	return dispatch => {
 		return api.loadContent({
 				language: params.edition,
-				type: params.post_type
+				type: params.type
 			}, function(json) {
-			dispatch(receivePosts(json, params.post_type));
+			dispatch(receivePosts(json, params.type   ));
 		});
 	}
 }

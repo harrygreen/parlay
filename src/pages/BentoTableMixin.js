@@ -1,6 +1,6 @@
 import React from 'react';
 import api from '../utils/api';
-import { fetchPosts } from '../actions/globalActions';
+import { fetchPosts } from '../actions/GlobalActions';
 
 const BentoTableMixin = {
 
@@ -9,10 +9,12 @@ const BentoTableMixin = {
 	},
 
 	componentDidMount() {
+
 		const { dispatch } = this.props;
+
 		dispatch(fetchPosts({
 			edition: this.props.edition,
-			post_type: this.props.type
+			type: this.props.type
 		}))
 	}
 }

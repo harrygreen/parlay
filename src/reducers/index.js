@@ -15,7 +15,7 @@ function receivePosts(state = {}, action) {
 	switch (action.type) {
 		case CONSTANTS.RECEIVED_POSTS:
 			return Object.assign({}, state, {
-				post_type: action.post_type,
+				type: action.post_type,
 				posts: action.posts
 			});
 		default:
