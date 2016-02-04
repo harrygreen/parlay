@@ -1,5 +1,5 @@
 import React from 'react';
-import { switchEdition } from '../actions/GlobalActions';
+import { switchEditionParent } from '../actions/GlobalActions';
 
 const EditionSwitcher = React.createClass({
 
@@ -112,20 +112,18 @@ const EditionSwitcher = React.createClass({
 	},
 
 	handleChange(e) {
-	 	this.props.dispatch(switchEdition(e.target.value));
+	 	this.props.dispatch(switchEditionParent(e.target.value));
     },
 
 	render() {
-		let options = [];
-		let optionsObj = this.getAvailableOptions();
 
-		for (let key of Object.keys(optionsObj)) {
-		  	options.push(<option value={key} key={key}>{optionsObj[key].name}</option>);
-		}
+		let options = this.getAvailableOptions();
 
 		return (
 			<select className='select' defaultValue={this.props.edition} onChange={this.handleChange}>
-				{options}
+				{Object.keys(options).map(function(key, i) {
+					return <option value={key} key={key}>{options[key].name}</option>
+				})}
 			</select>
 		)
 	}

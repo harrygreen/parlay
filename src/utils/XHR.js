@@ -24,10 +24,35 @@
 */
 
 import request from 'superagent';
+import * as CONSTANTS from '../constants'
 
 export default {
 
-	root: '/proxy/http://dev.buzzfeed.com/buzzfeed/translation_moderation',
+	proxy: '/proxy/', // todo - empty this on prod
+
+	get(url, params) {
+		return request.get(this.proxy + url).query(params).then((response) => response.data);
+	},
+
+	// getACLs(url, params, callback) {
+
+	// 	let obj = Object.assign({
+	// 		action: 'load_limited_acls',
+	// 		rules: ['homepage_edit', 'queue_add', 'queue_edit']
+	// 	}, params);
+
+	// 	request
+	// 	.get(this.proxy + CONSTANTS.ACL_ENDPOINT)
+	// 	.query(obj)
+	// 	.end(function(errror, response) {
+	// 		if (error) {
+
+	// 		} else {
+	// 			let data = JSON.parse(response.xhr.responseText);
+	// 			console.log(data);
+	// 		}
+	// 	})
+	// },
 
 	loadContent(params, callback) {
 
@@ -38,7 +63,7 @@ export default {
 		}, params);
 
 		request
-		.get(this.root)
+		.get(this.proxy + CONSTANTS.TRANSLATION_ENDPOINT)
 		.query(obj)
 		.end(function(error, response) {
 			if (error && error.status === 401) {

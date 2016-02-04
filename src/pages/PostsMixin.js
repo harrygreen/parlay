@@ -2,7 +2,7 @@ import React from 'react';
 import api from '../utils/api';
 import { fetchPosts } from '../actions/GlobalActions';
 
-const BentoTableMixin = {
+const PostsMixin = {
 
 	propTypes: {
 		edition: React.PropTypes.string.isRequired,
@@ -13,10 +13,10 @@ const BentoTableMixin = {
 		const { dispatch } = this.props;
 
 		dispatch(fetchPosts({
-			edition: this.props.edition,
+			language: this.props.edition,
 			type: this.props.type
 		}))
 	}
 }
 
-export default BentoTableMixin;
+export default PostsMixin;

@@ -11,7 +11,7 @@ new WebpackDevServer(webpack(config), {
   },
   proxy: {
     '/proxy/*': {
-      target: 'http://dev.buzzfeed.com/buzzfeed/translation_moderation',
+      target: 'http://dev.buzzfeed.com',
       secure: false,
     },
   },

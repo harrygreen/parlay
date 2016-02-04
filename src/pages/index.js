@@ -2,33 +2,32 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Nav from '../components/Nav'
 import EditionSwitcher from '../components/EditionSwitcher';
-import auth from '../utils/auth'
-
+import User from '../utils/User'
+import LoggedOutModal from '../components/LoggedOutModal';
 
 const App = React.createClass({
 
   getInitialState: function() {
     return {
-      loggedIn: auth.loggedIn(),
+      isLoggedIn: User.isLoggedIn(),
     };
-  },
-
-  componentWillMount: function() {
-    auth.onChange = this._updateAuth
-    auth.login()
-  },
-
-  _updateAuth: function(loggedIn) {
-   this.setState({
-     loggedIn: loggedIn
-   })
   },
 
   render: function() {
     const { dispatch, edition } = this.props
+
+    if (!this.state.isLoggedIn) {
+      document.body.classList.add('js-show-modal')
+    } else {
+      // User.getACLs().then(function(data) {
+      //   debugger;
+      //   console.log(data);
+      // })
+    }
+
     return (
       <div>
-        {this.state.loggedIn ? null : (<p>You are logged out</p> )}
+        { this.state.isLoggedIn ? null : (<LoggedOutModal /> )}
       	<h1>Bento ({this.props.edition} edition)</h1>
         <EditionSwitcher edition={this.props.edition} dispatch={dispatch} />
         <Nav />

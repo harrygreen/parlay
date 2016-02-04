@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 
 import FilterBar from '../components/FilterBar'
 import BentoItems from '../components/BentoItems'
-import BentoTableMixin from './BentoTableMixin'
+import PostsMixin from './PostsMixin'
+
+// TODO: the Posts Tables could sit in their own components, away from page-level elements
 
 const Candidates = React.createClass({
 
-	mixins: [ BentoTableMixin ],
+	mixins: [ PostsMixin ],
 
 	getDefaultProps() {
 		return {
@@ -19,7 +21,6 @@ const Candidates = React.createClass({
 		return (
 			<div>
 				<h2>Candidates</h2>
-				<FilterBar />
 				<BentoItems posts={this.props.posts} />
 			</div>
 		);
@@ -28,5 +29,5 @@ const Candidates = React.createClass({
 
 export default connect(state => ({
 	edition: state.edition,
-	posts: state.receivePosts.posts
+	posts: state.posts.posts
 }))(Candidates)

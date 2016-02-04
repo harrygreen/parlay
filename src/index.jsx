@@ -18,7 +18,7 @@ import NotFound from './pages/NotFound'
 import '../node_modules/bf-solid/_lib/solid.scss';
 import '../sass/bento.scss';
 
-
+// todo - move?
 function logger({ getState }) {
   return next => action => {
     console.info('dispatching', action);

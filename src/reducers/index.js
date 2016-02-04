@@ -11,7 +11,7 @@ function edition(state = 'de', action) {
 }
 
 
-function receivePosts(state = {}, action) {
+function posts(state = {}, action) {
 	switch (action.type) {
 		case CONSTANTS.RECEIVED_POSTS:
 			return Object.assign({}, state, {
@@ -24,6 +24,6 @@ function receivePosts(state = {}, action) {
 }
 
 export default combineReducers({
-	receivePosts,
+	posts,
 	edition
 });

@@ -1,11 +1,18 @@
 import * as CONSTANTS from '../constants'
-import api from '../utils/api';
+import XHR from '../utils/XHR';
 
 export function switchEdition(id) {
   return {
     type: CONSTANTS.SWITCH_EDITION,
     id
   };
+}
+
+export function switchEditionParent(id) {
+  return (dispatch, getState) => {
+    dispatch( switchEdition(id) );
+    dispatch( fetchPosts( Object.assign(getState().posts, { language: id }) ) );
+  }
 }
 
 export function receivePosts(json, post_type) {
@@ -17,12 +24,19 @@ export function receivePosts(json, post_type) {
 }
  
 export function fetchPosts(params) {
-	return dispatch => {
-		return api.loadContent({
-				language: params.edition,
-				type: params.type
-			}, function(json) {
-			dispatch(receivePosts(json, params.type   ));
-		});
-	}
+  return (dispatch, getState) => {
+
+    Object.assign({}, getState().posts, params)
+
+    return api.loadContent(Object.assign({}, getState().posts, params), function(json) {
+      dispatch( receivePosts(json, params.type ) );
+    });
+  }
 }
+
+// function fetchPostsIfNeeded(reddit) {
+//   return (dispatch, getState) => {
+//     if (!getState().postsByReddit[reddit]) {
+//       return dispatch(fetchPosts(reddit));
+//     }
+//   };
